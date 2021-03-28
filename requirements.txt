@@ -1,4 +1,5 @@
 pytgcalls
 ffmpeg-python
+python-dotenv
 signal
 pyrogram
