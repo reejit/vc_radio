@@ -1,0 +1,4 @@
+pytgcalls
+ffmpeg-python
+signal
+pyrogram
