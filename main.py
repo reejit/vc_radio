@@ -1,4 +1,5 @@
 import signal
+from tgcalls import client
 
 import ffmpeg  # pip install ffmpeg-python
 from pyrogram import Client, filters
