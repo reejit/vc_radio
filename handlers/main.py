@@ -18,17 +18,12 @@ To stop use !stop command
 '''
 
 
-# Commands available only for anonymous admins
-async def anon_filter(_, __, m: Message):
-    return bool(m.from_user is None and m.sender_chat)
-
-anonymous = filters.create(anon_filter)
 
 GROUP_CALLS = {}
 FFMPEG_PROCESSES = {}
 
 
-@Client.on_message(anonymous & filters.command('start', prefixes='!'))
+@Client.on_message(filters.command('start'))
 async def start(client, message: Message):
     input_filename = f'radio-{message.chat.id}.raw'
 
@@ -72,7 +67,7 @@ async def start(client, message: Message):
     await message.reply_text(f'Radio #{station_id} is playing...')
 
 
-@Client.on_message(anonymous & filters.command('stop', prefixes='!'))
+@Client.on_message(filters.command('stop'))
 async def stop(_, message: Message):
     group_call = GROUP_CALLS.get(message.chat.id)
     if group_call:
