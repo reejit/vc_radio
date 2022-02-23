@@ -5,7 +5,7 @@ import ffmpeg  # pip install ffmpeg-python
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from pytgcalls import GroupCall  # pip install pytgcalls
+from pytgcalls import GroupCallFactory  # pip install pytgcalls
 
 # Example of pinned message in a chat:
 '''
@@ -29,7 +29,7 @@ async def start(client, message: Message):
 
     group_call = GROUP_CALLS.get(message.chat.id)
     if group_call is None:
-        group_call = GroupCall(client, input_filename, path_to_log_file='')
+        group_call = GroupCallFactory(client, input_filename, path_to_log_file='')
         GROUP_CALLS[message.chat.id] = group_call
 
     if not message.reply_to_message or len(message.command) < 2:
