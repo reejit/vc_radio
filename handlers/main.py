@@ -1,11 +1,10 @@
 import signal
-from tgcalls import client
 
 import ffmpeg  # pip install ffmpeg-python
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from pytgcalls import GroupCallFactory  # pip install pytgcalls
+from pytgcalls import GroupCallFactory  # pip install pytgcalls[pyrogram]
 
 # Example of pinned message in a chat:
 '''
@@ -23,13 +22,13 @@ GROUP_CALLS = {}
 FFMPEG_PROCESSES = {}
 
 
-@Client.on_message(filters.command('start'))
+@Client.on_message(filters.command('start')
 async def start(client, message: Message):
     input_filename = f'radio-{message.chat.id}.raw'
 
     group_call = GROUP_CALLS.get(message.chat.id)
     if group_call is None:
-        group_call = GroupCallFactory(client, input_filename, path_to_log_file='')
+        group_call = GroupCallFactory(client, path_to_log_file='').get_file_group_call(input_filename)
         GROUP_CALLS[message.chat.id] = group_call
 
     if not message.reply_to_message or len(message.command) < 2:
