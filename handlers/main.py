@@ -22,8 +22,8 @@ GROUP_CALLS = {}
 FFMPEG_PROCESSES = {}
 
 
-@Client.on_message(filters.command('start')
-async def start(client, message: Message):
+@Client.on_message(filters.command('start'))
+async def start(client: Client, message: Message):
     input_filename = f'radio-{message.chat.id}.raw'
 
     group_call = GROUP_CALLS.get(message.chat.id)
